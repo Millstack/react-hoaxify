@@ -127,5 +127,63 @@ describe (`UserSignupPage`, () => {
             fireEvent.change(passwordRepeat, changeEvent('P4ssword'))
             expect(passwordRepeat).toHaveValue('P4ssword');
         });
+
+        // test for submit button API call for backend
+        // in testing we wont call actual API, instead we will pretend to call an API HTTP request
+        // this is called as mocking, with mock functions
+        // we can create mock functions in Jest, jest.fun() -- mock functions
+        it('calls postSignup when the fields are valid and actions are provided in props', () => {
+            
+            // actions object with postSignup as mock function
+            // in JS, asynchronous actions are handled with promise
+            // promise funtions will either end with resolved or reject result
+            // passing empty Json obj, dont want any return on success
+            const actions = {
+                postSignup: jest.fn().mockResolvedValueOnce({ })
+            }
+
+            const { container, queryByPlaceholderText } = render(<UserSignupPage actions = {actions} />)
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const displayNameInput = queryByPlaceholderText('Your display name')
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const usernameNameInput = queryByPlaceholderText('Your username')
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const passwordInput = queryByPlaceholderText('Your password')
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const passwordRepeat = queryByPlaceholderText('Repeat your password')
+
+            fireEvent.change(displayNameInput, changeEvent('my-display-name'))
+            fireEvent.change(usernameNameInput, changeEvent('my-user-name'))
+            fireEvent.change(passwordInput, changeEvent('P4ssword'))
+            fireEvent.change(passwordRepeat, changeEvent('P4ssword'))
+
+            // eslint-disable-next-line testing-library/no-node-access
+            const button = container.querySelector('button');
+            fireEvent.click(button);
+            expect(actions.postSignup).toHaveBeenCalledTimes(1);
+        })
+
+        // test when the props are not provided for onClick() button event
+        it('does not throw exception when clicking the button when actions not provided in props', () => {
+            
+            const { container, queryByPlaceholderText } = render(<UserSignupPage />)
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const displayNameInput = queryByPlaceholderText('Your display name')
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const usernameNameInput = queryByPlaceholderText('Your username')
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const passwordInput = queryByPlaceholderText('Your password')
+            // eslint-disable-next-line testing-library/prefer-screen-queries
+            const passwordRepeat = queryByPlaceholderText('Repeat your password')
+
+            fireEvent.change(displayNameInput, changeEvent('my-display-name'))
+            fireEvent.change(usernameNameInput, changeEvent('my-user-name'))
+            fireEvent.change(passwordInput, changeEvent('P4ssword'))
+            fireEvent.change(passwordRepeat, changeEvent('P4ssword'))
+
+            // eslint-disable-next-line testing-library/no-node-access
+            const button = container.querySelector('button');
+            expect(() => fireEvent.click(button)).not.toThrow();
+        })
     })
 })

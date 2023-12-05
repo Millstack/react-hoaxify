@@ -37,6 +37,18 @@ export class UserSignupPage extends React.Component {
         this.setState({ passwordRepeat: value })
     }
 
+    //
+    onClickSignup = () => {
+        // to check if props are provided to prevent exception
+        // also props present ? test passed, but there are multiple ways, below is one
+        // if(this.props.actions){
+        //     this.props.actions.postSignup()
+        // }
+
+        //alternatively, we can set default properties of component
+        // at the bottom of the page
+    }
+
     render () {
         return (
             <div>
@@ -56,10 +68,20 @@ export class UserSignupPage extends React.Component {
                     <input placeholder="Repeat your password" type="password" value={this.state.passwordRepeat} onChange={this.onChangePasswordRepeat}/>
                 </div>
                 <div>
-                    <button type="">Sign Up</button>
+                    <button type="" onClick={this.onClickSignup}>Sign Up</button>
                 </div>
             </div>
         )
+    }
+}
+
+// React allows us to set default properties of components
+// setting Json object in default props
+// postSignup will be a function with ashynchronous API call
+// this function will return a promise
+UserSignupPage.defaultProps = {
+    actions: {
+        postSignup: () => new Promise((resolve, reject) => {resolve({})})
     }
 }
 
