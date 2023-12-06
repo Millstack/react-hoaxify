@@ -37,7 +37,7 @@ export class UserSignupPage extends React.Component {
         this.setState({ passwordRepeat: value })
     }
 
-    //
+    // on click event function
     onClickSignup = () => {
         // to check if props are provided to prevent exception
         // also props present ? test passed, but there are multiple ways, below is one
@@ -47,6 +47,7 @@ export class UserSignupPage extends React.Component {
 
         //alternatively, we can set default properties of component
         // at the bottom of the page
+        this.props.actions.postSignup()
     }
 
     render () {
@@ -77,7 +78,7 @@ export class UserSignupPage extends React.Component {
 
 // React allows us to set default properties of components
 // setting Json object in default props
-// postSignup will be a function with ashynchronous API call
+// postSignup will be an ashynchronous function with API call
 // this function will return a promise
 UserSignupPage.defaultProps = {
     actions: {

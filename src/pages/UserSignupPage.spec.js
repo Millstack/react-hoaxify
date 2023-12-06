@@ -146,14 +146,14 @@ describe (`UserSignupPage`, () => {
             // eslint-disable-next-line testing-library/prefer-screen-queries
             const displayNameInput = queryByPlaceholderText('Your display name')
             // eslint-disable-next-line testing-library/prefer-screen-queries
-            const usernameNameInput = queryByPlaceholderText('Your username')
+            const usernameInput = queryByPlaceholderText('Your username')
             // eslint-disable-next-line testing-library/prefer-screen-queries
             const passwordInput = queryByPlaceholderText('Your password')
             // eslint-disable-next-line testing-library/prefer-screen-queries
             const passwordRepeat = queryByPlaceholderText('Repeat your password')
 
             fireEvent.change(displayNameInput, changeEvent('my-display-name'))
-            fireEvent.change(usernameNameInput, changeEvent('my-user-name'))
+            fireEvent.change(usernameInput, changeEvent('my-user-name'))
             fireEvent.change(passwordInput, changeEvent('P4ssword'))
             fireEvent.change(passwordRepeat, changeEvent('P4ssword'))
 
@@ -170,14 +170,14 @@ describe (`UserSignupPage`, () => {
             // eslint-disable-next-line testing-library/prefer-screen-queries
             const displayNameInput = queryByPlaceholderText('Your display name')
             // eslint-disable-next-line testing-library/prefer-screen-queries
-            const usernameNameInput = queryByPlaceholderText('Your username')
+            const usernameInput = queryByPlaceholderText('Your username')
             // eslint-disable-next-line testing-library/prefer-screen-queries
             const passwordInput = queryByPlaceholderText('Your password')
             // eslint-disable-next-line testing-library/prefer-screen-queries
             const passwordRepeat = queryByPlaceholderText('Repeat your password')
 
             fireEvent.change(displayNameInput, changeEvent('my-display-name'))
-            fireEvent.change(usernameNameInput, changeEvent('my-user-name'))
+            fireEvent.change(usernameInput, changeEvent('my-user-name'))
             fireEvent.change(passwordInput, changeEvent('P4ssword'))
             fireEvent.change(passwordRepeat, changeEvent('P4ssword'))
 
