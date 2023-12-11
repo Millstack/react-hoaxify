@@ -35,12 +35,11 @@
     ]
   },
   "jest": {
-    "resetMocks": false,
-    "preset": "@vue/cli-plugin-unit-jest",
-    "transformIgnorePatterns": ["node_modules\/(?!axios)"]
+    "resetMocks": false
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.2"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

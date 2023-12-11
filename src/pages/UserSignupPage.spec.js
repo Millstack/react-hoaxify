@@ -88,6 +88,16 @@ describe (`UserSignupPage`, () => {
             }
         };
 
+        const mockAsyncDelayed = () => {
+            return jest.fn().mockImplementation(() => {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve({})
+                    }, 300)
+                })
+            })
+        }
+
         // to prevent the code repeating, susing variables to optimize them
         let button, displayNameInput, usernameInput, passwordInput, passwordRepeat;
 
@@ -193,6 +203,19 @@ describe (`UserSignupPage`, () => {
                 password: 'PsswordP',
             }
 
+            expect(actions.postSignup).toHaveBeenCalledTimes(1);
+        })
+
+        // test for disabling submit button during on going API call for backend
+        it('does not allow to click Signup button for ongoing API call', () => {
+            
+            const actions = {
+                postSignup: mockAsyncDelayed()
+            }
+
+            setupForSubmit({actions});
+            fireEvent.click(button);
+            fireEvent.click(button);
             expect(actions.postSignup).toHaveBeenCalledTimes(1);
         })
     })

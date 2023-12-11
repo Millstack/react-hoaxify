@@ -9,6 +9,7 @@ export class UserSignupPage extends React.Component {
         username: '',
         password: '',
         passwordRepeat: '',
+        pendingApiCall: false,
     };
 
     // creating an onChange function for display name, when the state is changed
@@ -37,13 +38,14 @@ export class UserSignupPage extends React.Component {
         this.setState({ passwordRepeat: value })
     }
 
-    // on click event function
+    // on click event function for API call
     onClickSignup = () => {
         const user = {
             username: this.state.username,
             displayName: this.state.displayName,
             password: this.state.password,
         }
+        this.setState({pendingApiCall: true})
         this.props.actions.postSignup(user)
     }
 
@@ -76,7 +78,7 @@ export class UserSignupPage extends React.Component {
                     </div>
                 </div>
                 <div className='text-center mt-3'>
-                    <button type="" className='btn btn-primary' onClick={this.onClickSignup}>Sign Up</button>
+                    <button type="" className='btn btn-primary' onClick={this.onClickSignup} disabled={this.state.pendingApiCall} >Sign Up</button>
                 </div>
             </div>
         )
